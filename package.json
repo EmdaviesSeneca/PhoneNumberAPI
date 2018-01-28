@@ -2,7 +2,8 @@
     "name": "node-api",
     "main": "server.js",
     "dependencies": {
+        "body-parser": "~1.0.1",
         "express": "~4.0.0",
-        "body-parser": "~1.0.1"
+        "google-libphonenumber": "^3.0.10"
     }
 }
