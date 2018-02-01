@@ -52,3 +52,5 @@ function parseNumbers(unparsedNumbers) {
 	}
 	return finalArray;
 }
+
+module.exports = app;
