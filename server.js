@@ -1,31 +1,54 @@
 var express = require('express');
 var app = express();
-var bodyParser = require('body-parser');
 var PNF = require('google-libphonenumber').PhoneNumberFormat;
 var phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance();
+var multer = require('multer');
 
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
+var file = multer({ dest: '/uploads' });
+var fs = require('fs');
+
 
 app.get("/", function(req, res) {
-	
-	res.json({message: "HELLO WORLD!"});
+	res.status(200).send('API is working.');
 });
 
-app.get("/api/phonenumbers/parse/text/:number*", function(req, res) {
-	if (req.params.number = "nothing") {
-		res.json({message: "[]"});
+app.get("/api/phonenumbers/parse/text/:number", function(req, res) {
+	if (req.params.number == "nothing") {
+		res.status(400).send('[]');
 	} else {
-		var phoneNumber = phoneUtil.parse(req.params.number, 'CA');
-		res.json({message: phoneUtil.format(phoneNumber, PNF.NATIONAL)});
+		var arr = [];
+		arr.push(req.params.number);
+		var finalArray = parseNumbers(arr);
+		res.status(200).send(finalArray);
 	}
 });
 
-app.post("/api/phonenumbers/parse/file/:filename*", function(req, res) {
-	
-	res.json({message: "Parsing part for file exists here!"});
+app.post("/api/phonenumbers/parse/file", file.single('file'), function(req, res) {
+	if (!req.file) {
+		res.status(400).send('No file was attached');
+	} else {
+		var content = Buffer.from(fs.readFileSync(req.file.path));
+		var numbers = content.toString().split('\n');
+		var finalArray = parseNumbers(numbers);
+		res.status(200).send(finalArray);
+		
+	}
 });
 var port = process.env.PORT || 8080;
 
 app.listen(port);
 console.log('Your app is running');
+
+function parseNumbers(unparsedNumbers) {
+	var numbers;
+	var finalArray = [];
+	try {	
+		for (var i = 0; i < unparsedNumbers.length; i++) {
+			numbers = phoneUtil.parse(unparsedNumbers[i], 'CA'); //this line is broken for some reason
+			finalArray.push(phoneUtil.format(numbers, PNF.INTERNATIONAL));
+		}
+	} catch(error) {
+		console.log("Something went wrong!: " + error);
+	}
+	return finalArray;
+}
