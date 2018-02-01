@@ -18,7 +18,7 @@ app.get("/api/phonenumbers/parse/text/:number", function(req, res) {
 	} else {
 		var arr = [];
 		arr.push(req.params.number);
-		var finalArray = parseNumbers(arr);
+		var finalArray = parseNumbers(arr, res);
 		res.status(200).send(finalArray);
 	}
 });
@@ -29,9 +29,8 @@ app.post("/api/phonenumbers/parse/file", file.single('file'), function(req, res)
 	} else {
 		var content = Buffer.from(fs.readFileSync(req.file.path));
 		var numbers = content.toString().split('\n');
-		var finalArray = parseNumbers(numbers);
-		res.status(200).send(finalArray);
-		
+		var finalArray = parseNumbers(numbers, res);
+		res.status(200).send(finalArray);	
 	}
 });
 var port = process.env.PORT || 8080;
@@ -39,7 +38,7 @@ var port = process.env.PORT || 8080;
 app.listen(port);
 console.log('Your app is running');
 
-function parseNumbers(unparsedNumbers) {
+function parseNumbers(unparsedNumbers, res) {
 	var numbers;
 	var finalArray = [];
 	try {	
@@ -47,10 +46,10 @@ function parseNumbers(unparsedNumbers) {
 			numbers = phoneUtil.parse(unparsedNumbers[i], 'CA'); //this line is broken for some reason
 			finalArray.push(phoneUtil.format(numbers, PNF.INTERNATIONAL));
 		}
+		return finalArray;
 	} catch(error) {
-		console.log("Something went wrong!: " + error);
+		res.status(400).send("Something went wrong!: " + error);
 	}
-	return finalArray;
 }
 
 module.exports = app;
