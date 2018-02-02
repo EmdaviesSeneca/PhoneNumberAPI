@@ -15,9 +15,9 @@ And then run this code to start your server on the port 8080.
 ```ch
 node server.js
 ```
-The server be running like this: 
+The server will be running like this: 
 
-![Server](images/server.png)
+![server](images/server.PNG)
 
 To test the API endpoints GET and POST you must first download Postman application from here https://www.getpostman.com/.
 
