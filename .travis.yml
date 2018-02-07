@@ -5,3 +5,8 @@ install:
   - npm install
 script:
   - npm test
+deploy:
+  app: phone-number-api
+  provider: heroku
+  api_key:
+    secure: 349b9c2c-95ac-4019-bd57-55d7bf5c3afa
