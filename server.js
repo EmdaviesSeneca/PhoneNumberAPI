@@ -4,7 +4,7 @@ var PNF = require('google-libphonenumber').PhoneNumberFormat;
 var phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance();
 var multer = require('multer');
 
-var file = multer({ dest: '/uploads' });
+var file = multer({ dest: './uploads' });
 var fs = require('fs');
 
 
