@@ -1,12 +1,12 @@
 language: node_js
 node_js:
-  - "node" # use the latest nodejs
+- node
 install:
-  - npm install
+- npm install
 script:
-  - npm test
+- npm test
 deploy:
   app: phone-number-api
   provider: heroku
   api_key:
-    secure: 349b9c2c-95ac-4019-bd57-55d7bf5c3afa
+    secure: Guy90YERuE2uKQTQ2kvoqB9lZiN6Oedqsyj89peu0FKDWZbmr64e4kJNypgiyZ86FG9aUGRnCwW5R6HiLgB1CpCVzvQzKeFtNH86AZY88KxOieB2+7U8U7sIzZP4w2Ys+HaKbcDpwljPwEm56CKZJr+S5kuudwJCSxpWFfAV+bpJXZxuPreeG2drM6uA/fAIuVHKIhilmzieCuRodztNivTZnJCOMGFS6mF7hTidGzbAmKS4ah5X+5IIE5AAXoTArOLBY7AVyxis+evDQzXaXZ9qCU+BrtHYcKJqh7hMyHl1uBsf22Cu2zqO6vFH6OdG/B/nlogDRWeRVn2B2T3l56z2/CcYBbS3U9FUjluglHIroYpig8NU6wEczKilxr8ZXCGFBtaJ5bNbge7+oaYgfHmNUGacm0ryMFxcdXSDHcw5QtlAsXS4du6FHDMRqzquXiomEZAoAFpL2KNRk70eHTdZkTG6bm9zC3WNPT2lhUPbzHozoJI9z8mufOwEm6u8NmaZ7nCrxLRt5oBBv6lHXEzbqywCW26k0CZIoYbgp4D63YLiJhYYvE6QQfw0HlR3NMX/R5ZO+FYb0Y6ypkZ4Pqa0a5M0IIUwF4DyolAxdnCLjWKgq/7BcFG6vV3t+ajf2x/KmPVW+Szs282inwpS45KAvDVp51kZoP525Bgxaow=
