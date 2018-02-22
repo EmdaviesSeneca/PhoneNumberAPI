@@ -39,4 +39,7 @@ To run the tests go into the server and run the command node npm test like the s
 
 ![Test](images/test.PNG)
 
+#HTML Interface
+To use the HTML interface, go to Localhost:8080.
+
 

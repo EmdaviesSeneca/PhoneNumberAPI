@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    div { font-size:200%; text-align:center; border-style:solid; border-color:red; width: 500px;  margin: auto;}
+    </style>
+</head>
+<body>
+   <div >
+        <form action="/api/phonenumbers/parse/text/" method="get">
+            <label for="getTxt">Enter text including a phone number:</label>
+            
+			<input type="text" name="getTxt" >
+			<br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+	<br>
+    <div >
+        <form action="/api/phonenumbers/parse/file/" method="post" enctype="multipart/form-data">
+            <label for="getFile">Upload a text file containing a phone number:</label>
+            <br>
+			<input type="file" name="file">
+			<br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>
