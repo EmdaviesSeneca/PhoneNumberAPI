@@ -3,27 +3,32 @@ var app = express();
 var PNF = require('google-libphonenumber').PhoneNumberFormat;
 var phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance();
 var multer = require('multer');
-
+var path = require("path");
 var file = multer({ dest: './uploads' });
+var fileUpload  = multer({ dest: 'uploads/'});
 var fs = require('fs');
 
 
-app.get("/", function(req, res) {
-	res.status(200).send('API is working.');
+app.get('/', (req, res) => {
+    res.status(200).sendfile(path.join(__dirname + "/index.html"));
 });
 
-app.get("/api/phonenumbers/parse/text/:number", function(req, res) {
-	if (req.params.number == "nothing") {
-		res.status(400).send('[]');
-	} else {
+
+app.get("/api/phonenumbers/parse/text/", function(req, res) {
+	if(typeof req.query.getTxt === 'undefined'){
+        res.status(200).json();
+        return;
+    }
+	else {
 		var arr = [];
-		arr.push(req.params.number);
+		arr.push(req.query.getTxt);
 		var finalArray = parseNumbers(arr, res);
-		res.status(200).send(finalArray);
+	
+	res.status(200).send(finalArray);
 	}
 });
 
-app.post("/api/phonenumbers/parse/file", file.single('file'), function(req, res) {
+app.post("/api/phonenumbers/parse/file", fileUpload.single('file'), function(req, res) {
 	if (!req.file) {
 		res.status(400).send('No file was attached');
 	} else {
