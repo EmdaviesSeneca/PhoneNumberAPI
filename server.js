@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 
 app.get("/api/phonenumbers/parse/text/", function(req, res) {
 	if(typeof req.query.getTxt === 'undefined'){
-        res.status(200).json();
+        res.status(400).json();
         return;
     }
 	else {
